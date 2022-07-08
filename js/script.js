@@ -10,11 +10,13 @@ try {
         // Display
         displaySeries(json);
         displayStyles(getStyles(json));
-
+        
         // Event handlers
         manageClickStyles();
-        manageSeriesClick()
-        manageFavClick()
+        manageSeriesClick();
+        manageFavClick();
+        getSeriesIdInOrderOfReleaseYear();
+        
     }); 
 } catch (error) {
     console.error("error" + error);
@@ -163,15 +165,16 @@ function displayFavList(){
     favList.forEach(serie => {
        html += `<li data-id="${serie.id}">${serie.name}</li>` 
     })
-    document.getElementById("favoris").innerHTML = html;
+    document.getElementById("favoris").innerText = favList.length
+    document.getElementById("favoris").innerHTML += html;
 }
 
 // 18/ Créer une fonction permettant de retirer une série de la liste des favoris de par son id.
 
 function removeSerieFromFav(id) {
    favList = favList.filter(serie => serie.id !== parseInt(id));
-   displayFavList();
 }
+
 
 // 19/ Créez une fonction qui fasse qu'au clic sur un favoris il se retire de la liste.
 
@@ -184,27 +187,56 @@ function manageFavClick() {
 
 // 20/ Créer une fonction qui affiche le nombre de favoris en titre de la liste des favoris.
 
+function addNumberOfFavs() {
+    document.getElementById("favoris").innerText = favList.length; 
+}
+
+/* 95% progress... */
 
 // 21/ Créer une fonction qui retourne les id des séries par ordre d'année de sortie.
 
+let seriesRelease = []
+function getSeriesIdInOrderOfReleaseYear() { /* ce nom de fonction est beaucoup trop long */
+    series.sort((a,b) => a.launchYear - b.launchYear).forEach(serie => seriesRelease.push(serie.id))
+    return seriesRelease
+}
+
+console.table(getSeriesIdInOrderOfReleaseYear())
 
 // 22/ Créer une fonction qui affiche les séries dans la page dans l'ordre des ids passés en paramètre.
+
+
+
 
 
 // 23/ Créer une fonction qui permet de gérer au clic sur un lien dans la page le tri des series par années croissantes
 
 
+
+
 // 24/ Permettez à la fonction précédente de gérer un click sur un autre lien pour trier les series par années décroissantes.
+
+
 
 
 // 25/ Créer une fonction qui désactive le filtre activé.
 
 
+
+
+
 // 26/ Créer une fonction qui permet de gérer au clic sur un lien la désactivation des filtres.
+
+
+
 
 
 // 27/ Créer une fonction qui gère l'affichage de ce lien de désactivation des filtres uniquement quand un filtre est activé.
 
 
+
+
 // 28/ Créer l'ensemble des fonctions permettant d'ajouter la fonctionnalité de filtrage par pays d'origine,
 //     en reprenant la logique des questions 3/ à 11/ sur le filtrage par style. 
+
+
